@@ -135,33 +135,19 @@ public class Geometry {
         return distanceBetween(sphere.center, ray) < sphere.radius;
     }
 
-    // http://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
-    // Note that this formula treats Ray as if it extended infinitely past
-    // either point.
     public static float distanceBetween(Point point, Ray ray) {
         Vector p1ToPoint = vectorBetween(ray.point, point);
         Vector p2ToPoint = vectorBetween(ray.point.translate(ray.vector), point);
 
-        // The length of the cross product gives the area of an imaginary
-        // parallelogram having the two vectors as sides. A parallelogram can be
-        // thought of as consisting of two triangles, so this is the same as
-        // twice the area of the triangle defined by the two vectors.
-        // http://en.wikipedia.org/wiki/Cross_product#Geometric_meaning
         float areaOfTriangleTimesTwo
                 = p1ToPoint.crossProduct(p2ToPoint).length();
         float lengthOfBase = ray.vector.length();
 
-        // The area of a triangle is also equal to (base * height) / 2. In
-        // other words, the height is equal to (area * 2) / base. The height
-        // of this triangle is the distance from the point to the ray.
         float distanceFromPointToRay
                 = areaOfTriangleTimesTwo / lengthOfBase;
         return distanceFromPointToRay;
     }
 
-    // http://en.wikipedia.org/wiki/Line-plane_intersection
-    // This also treats rays as if they were infinite. It will return a
-    // point full of NaNs if there is no intersection point.
     public static Point intersectionPoint(Ray ray, Plane plane) {
         Vector rayToPlaneVector = vectorBetween(ray.point, plane.point);
 
