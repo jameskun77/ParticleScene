@@ -76,6 +76,8 @@ public class ParticlesRenderer implements Renderer {
 
     private float xRotation, yRotation;
 
+    private float xOffset, yOffset;
+
     public ParticlesRenderer(Context context) {
         this.context = context;
     }
@@ -91,6 +93,13 @@ public class ParticlesRenderer implements Renderer {
         }
 
         // Setup view matrix
+        updateViewMatrices();
+    }
+
+    public void handleOffsetsChanged(float xOffset, float yOffset) {
+        // Offsets range from 0 to 1.
+        this.xOffset = (xOffset - 0.5f) * 2.5f;
+        this.yOffset = (yOffset - 0.5f) * 2.5f;
         updateViewMatrices();
     }
 
