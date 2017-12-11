@@ -1,1 +1,5 @@
-# LiveWallpaper
+#Particle system
+
+##介绍
+一个简单的粒子系统，粒子数目固定，
+从发射器位置发射，然后受重力影响逐渐散落
